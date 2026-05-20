@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizons Engenharia | Soluções com BIM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variáveis de Cor da Marca */
+        :root {
+            --brand-dark-blue: #01011c;
+            --brand-light-blue: #008cff;
+            --brand-off-white: #f9f9f9;
+            --brand-dark-grey: #202020;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--brand-off-white);
+            color: var(--brand-dark-grey);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        header {
+            background-color: var(--brand-dark-blue);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container img {
+            height: 40px; /* Ajuste conforme necessário para o horizon-logo-principal-1.png */
+        }
+
+        .logo-text {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--brand-light-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--brand-light-blue);
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            background-color: var(--brand-dark-blue);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--brand-dark-grey);
+        }
+
+        /* Services / About */
+        .services {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            text-align: center;
+            color: var(--brand-dark-blue);
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--brand-light-blue);
+        }
+
+        .service-card h3 {
+            color: var(--brand-dark-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Footer / Contact */
+        footer {
+            background-color: var(--brand-dark-blue);
+            color: white;
+            padding: 60px 5% 30px;
+            text-align: center;
+        }
+
+        .contact-info {
+            margin-bottom: 30px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--brand-light-blue);
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            color: var(--brand-light-blue);
+        }
+
+        .copyright {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="horizon-logo-principal-1.png" alt="Horizons Engenharia Logo">
+            <div class="logo-text">HORIZONS ENGENHARIA</div>
+        </div>
+        <nav>
+            <a href="#servicos">Serviços</a>
+            <a href="#contactos">Contactos</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Engenharia inteligente, soluções com BIM.</h1>
+        <p>Inovação, rigor e otimização de projetos estruturais.</p>
+        <a href="#contactos" class="btn">Fale Connosco</a>
+    </section>
+
+    <section id="servicos" class="services">
+        <h2>As Nossas Soluções</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Projeto de Estruturas</h3>
+                <p>Dimensionamento avançado de estruturas em betão armado e aço, garantindo segurança, economia e viabilidade construtiva.</p>
+            </div>
+            <div class="service-card">
+                <h3>Coordenação e Modelação BIM</h3>
+                <p>Integração total do ciclo de vida do projeto. Centralização de informação, deteção de conflitos e extração rigorosa de quantitativos.</p>
+            </div>
+            <div class="service-card">
+                <h3>Gestão e Otimização</h3>
+                <p>Aplicação de metodologias ágeis e ferramentas de automação para garantir que os prazos e orçamentos da obra são rigorosamente cumpridos.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contactos">
+        <div class="contact-info">
+            <h3>Contactos</h3>
+            <p><strong>Henrique Franzener Hyppo</strong></p>
+            <p>Structural Engineer | BIM Manager</p>
+            <br>
+            <p>Telefone: <a href="tel:+351912429133">+351 912 429 133</a></p>
+            <p>Email: <a href="mailto:e-mail@gmail.com">e-mail@gmail.com</a></p>
+            <p>Website: <a href="http://horizonengenharia.com">horizonengenharia.com</a></p>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Horizons Engenharia. Todos os direitos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>
