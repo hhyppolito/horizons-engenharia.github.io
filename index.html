@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horizons Engenharia | Soluções com BIM</title>
+    
+    <!-- Favicon (Ícone da aba do navegador) -->
+    <link rel="icon" type="image/png" href="horizon-logo-principal-1.png">
+    <link rel="apple-touch-icon" href="horizon-logo-principal-1.png">
+    
+    <!-- Importação da fonte IBM Plex Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -28,25 +34,31 @@
             background-color: var(--brand-off-white);
             color: var(--brand-dark-grey);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Navbar */
         header {
             background-color: var(--brand-dark-blue);
-            padding: 1rem 5%;
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .logo-container img {
-            height: 40px; /* Ajuste conforme necessário para o horizon-logo-principal-1.png */
+            height: 45px;
+            width: auto;
         }
 
         .logo-text {
@@ -59,52 +71,67 @@
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
+            margin-left: 24px;
             font-weight: 400;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
             color: var(--brand-light-blue);
         }
 
-        /* Hero Section */
+        /* Hero Section com Imagem de Fundo e Overlay */
         .hero {
-            background-color: var(--brand-light-blue);
+            background-image: linear-gradient(
+                rgba(1, 1, 28, 0.85), 
+                rgba(0, 140, 255, 0.6)
+            ), url('fundo-estruturas.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: var(--brand-dark-blue);
             color: white;
-            padding: 100px 5%;
+            padding: 160px 5%;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             margin-bottom: 20px;
             font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 8px rgba(1, 1, 28, 0.5);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero p {
             font-size: 1.5rem;
             font-weight: 300;
             margin-bottom: 40px;
+            text-shadow: 1px 1px 4px rgba(1, 1, 28, 0.4);
         }
 
         .btn {
-            background-color: var(--brand-dark-blue);
+            background-color: var(--brand-light-blue);
             color: white;
-            padding: 15px 30px;
+            padding: 16px 36px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 4px;
             font-weight: 600;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
         }
 
         .btn:hover {
-            background-color: var(--brand-dark-grey);
+            background-color: #0077d6;
+            transform: translateY(-2px);
         }
 
-        /* Services / About */
+        /* Secção de Serviços */
         .services {
-            padding: 80px 5%;
+            padding: 100px 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -112,55 +139,109 @@
         .services h2 {
             text-align: center;
             color: var(--brand-dark-blue);
-            font-size: 2.2rem;
-            margin-bottom: 50px;
+            font-size: 2.4rem;
+            margin-bottom: 60px;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .services h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--brand-light-blue);
+            margin: 15px auto 0;
+            border-radius: 2px;
         }
 
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .service-card {
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 40px 30px;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             border-top: 4px solid var(--brand-light-blue);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .service-icon {
+            font-size: 2.6rem;
+            margin-bottom: 20px;
         }
 
         .service-card h3 {
             color: var(--brand-dark-blue);
             margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
 
-        /* Footer / Contact */
+        .service-card p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .service-card strong {
+            color: var(--brand-dark-blue);
+            font-weight: 600;
+        }
+
+        /* Rodapé / Contactos */
         footer {
             background-color: var(--brand-dark-blue);
             color: white;
-            padding: 60px 5% 30px;
+            padding: 80px 5% 40px;
             text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .contact-info {
-            margin-bottom: 30px;
+            max-width: 600px;
+            margin: 0 auto 40px;
         }
 
         .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            margin-bottom: 25px;
             color: var(--brand-light-blue);
+            font-weight: 700;
+        }
+
+        .contact-info .name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .contact-info .role {
+            font-size: 1rem;
+            color: #a0a0b0;
+            margin-bottom: 25px;
         }
 
         .contact-info p {
             font-size: 1.1rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: 300;
         }
 
         .contact-info a {
             color: white;
             text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s ease;
         }
         
         .contact-info a:hover {
@@ -168,9 +249,18 @@
         }
 
         .copyright {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #888;
+            margin-top: 60px;
+            font-size: 0.85rem;
+            color: #606070;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.2rem; }
+            header { flex-direction: column; gap: 15px; text-align: center; }
+            nav a { margin: 0 10px; }
         }
     </style>
 </head>
@@ -189,35 +279,50 @@
 
     <section class="hero">
         <h1>Engenharia inteligente, soluções com BIM.</h1>
-        <p>Inovação, rigor e otimização de projetos estruturais.</p>
-        <a href="#contactos" class="btn">Fale Connosco</a>
+        <p>Inovação, rigor e otimização global de projetos.</p>
+        <a href="#contactos" class="btn">Solicitar Proposta</a>
     </section>
 
     <section id="servicos" class="services">
         <h2>As Nossas Soluções</h2>
         <div class="service-grid">
+            <!-- Serviço 1 -->
             <div class="service-card">
+                <div class="service-icon">🏗️</div>
                 <h3>Projeto de Estruturas</h3>
-                <p>Dimensionamento avançado de estruturas em concreto armado e aço, garantindo segurança, economia e viabilidade construtiva.</p>
+                <p>O nosso núcleo de especialidade. Dimensionamento avançado de estruturas em <strong>betão armado, pré-esforçado e estruturas metálicas</strong>. Projetos focados na otimização de materiais e total conformidade com os Eurocódigos.</p>
             </div>
+
+            <!-- Serviço 2 -->
             <div class="service-card">
-                <h3>Coordenação e Modelação BIM</h3>
-                <p>Integração total do ciclo de vida do projeto. Centralização de informação, deteção de conflitos e extração rigorosa de quantitativos.</p>
+                <div class="service-icon">📐</div>
+                <h3>Projetos de Especialidades (Global)</h3>
+                <p>Asseguramos o desenvolvimento e entrega de <strong>todas as redes e especialidades técnicas</strong> necessárias para licenciamento e execução: redes hidráulicas, elétricas, telecomunicações (ITED), segurança (SCIE), acústica e térmica.</p>
             </div>
+
+            <!-- Serviço 3 -->
             <div class="service-card">
-                <h3>Gestão e Otimização</h3>
-                <p>Aplicação de metodologias ágeis e ferramentas de automação para garantir que os prazos e orçamentos da obra são rigorosamente cumpridos.</p>
+                <div class="service-icon">🔄</div>
+                <h3>Coordenação e Compatibilização</h3>
+                <p>Centralizamos a gestão de todas as equipas técnicas. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>, garantindo que todas as especialidades encaixam sem erros antes de chegar à obra.</p>
+            </div>
+
+            <!-- Serviço 4 -->
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Modelação e Consultoria BIM</h3>
+                <p>Desenvolvimento de modelos virtuais inteligentes (LOD) para extração rigorosa de mapas de quantidades de ferro, betão e aço, reduzindo desvios orçamentais, imprevistos e otimizando a fase de construção.</p>
             </div>
         </div>
     </section>
 
     <footer id="contactos">
         <div class="contact-info">
-            <h3>Contactos</h3>
-            <p><strong>Henrique Franzener Hyppolito</strong></p>
-            <p>Structural Engineer | BIM Manager</p>
+            <h3>Fale Connosco</h3>
+            <p class="name">Henrique Franzener Hyppolito</p>
+            <p class="role">Structural Engineer | BIM Manager</p>
             <br>
-            <p>Email: <a href="mailto:horizons.engenharia@gmail.com">horizons.engenharia@gmail.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:horizons.engenharia@gmail.com">horizons.engenharia@gmail.com</a></p>
         </div>
         <div class="copyright">
             &copy; 2026 Horizons Engenharia. Todos os direitos reservados.
