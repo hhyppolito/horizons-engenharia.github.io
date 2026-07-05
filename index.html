@@ -37,17 +37,18 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 1. NAVBAR TRANSPARENTE & FLUTUANTE */
+        /* 1. NAVBAR TOTALMENTE TRANSPARENTE E FLUTUANTE */
         header {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 2rem 8%;
+            padding: 3rem 8% 0; /* Alinhamento superior */
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
+            background: transparent !important; /* Remove qualquer fundo sólido */
         }
 
         .logo-container {
@@ -106,7 +107,7 @@
             transform: translateY(-1px);
         }
 
-        /* 2. HERO SECTION IMERSIVA (OPÇÃO A - DARK TECH) */
+        /* 2. HERO SECTION IMERSIVA (FUNDO REAL) */
         .hero {
             position: relative;
             height: 100vh;
@@ -114,7 +115,7 @@
             display: flex;
             align-items: center;
             padding: 0 8%;
-            /* O gradiente escuro funde-se com o fundo branco da imagem do modelo axonométrico */
+            /* O gradiente começa do topo absoluto (0px), englobando o logo */
             background-image: linear-gradient(
                 90deg,
                 rgba(1, 1, 28, 0.98) 0%,
@@ -132,6 +133,7 @@
             max-width: 800px;
             text-align: left;
             z-index: 2;
+            margin-top: 60px; /* Empurra o texto para não colidir com o logo flutuante */
         }
 
         .hero h1 {
@@ -392,15 +394,22 @@
             text-align: center;
         }
 
-        /* RESPONSIVIDADE */
+        /* RESPONSIVIDADE SEM CORTES NO TOPO */
         @media (max-width: 992px) {
             .hero h1 { font-size: 2.8rem; }
-            header { padding: 1.5rem 5%; }
+            header { padding: 2rem 5% 0; }
         }
 
         @media (max-width: 768px) {
-            header { position: relative; background-color: var(--brand-dark-blue); padding: 1.2rem 5%; }
-            .hero { height: auto; padding: 120px 5% 100px; }
+            header { 
+                position: absolute; 
+                background: transparent !important; 
+                padding: 2rem 5% 0; 
+            }
+            .hero { 
+                height: auto; 
+                padding: 160px 5% 100px; 
+            }
             .hero h1 { font-size: 2.4rem; }
             nav { display: none; }
             section.content-section { padding: 80px 5%; }
@@ -409,7 +418,7 @@
 </head>
 <body>
 
-    <!-- 1. NAVBAR -->
+    <!-- 1. NAVBAR TOTALMENTE INTEGRADA NO GRADIENTE -->
     <header>
         <div class="logo-container">
             <img src="horizon-logo-principal-1.png" alt="Horizons Engenharia Logo">
@@ -451,7 +460,7 @@
             <div class="service-card">
                 <span class="service-icon">🔄</span>
                 <h3>Coordenação e Compatibilização</h3>
-                <p>Centralizamos a gestão de todas as equipas técnicas. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>, garantindo que todas as especialidades encaixam sem erros antes de chegar à obra.</p>
+                <p>Centralizamos a gestão de todas as equipas técnicas. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>,axando todas as especialidades sem erros antes de chegar à obra.</p>
             </div>
 
             <div class="service-card">
