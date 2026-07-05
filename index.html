@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horizons Engenharia | Soluções com BIM</title>
     
-    <!-- Favicon -->
+    <!-- Favicon (Ícone da aba do navegador) -->
     <link rel="icon" type="image/png" href="horizon-logo-principal-1.png">
     <link rel="apple-touch-icon" href="horizon-logo-principal-1.png">
     
@@ -106,7 +106,7 @@
             transform: translateY(-1px);
         }
 
-        /* 2. HERO SECTION IMERSIVA (ALINHADA À ESQUERDA) */
+        /* 2. HERO SECTION IMERSIVA (OPÇÃO A - DARK TECH) */
         .hero {
             position: relative;
             height: 100vh;
@@ -114,12 +114,13 @@
             display: flex;
             align-items: center;
             padding: 0 8%;
+            /* O gradiente escuro funde-se com o fundo branco da imagem do modelo axonométrico */
             background-image: linear-gradient(
                 90deg,
-                rgba(1, 1, 28, 0.95) 0%,
-                rgba(1, 1, 28, 0.8) 40%,
-                rgba(0, 140, 255, 0.2) 100%
-            ), url('fundo-estruturas.webp');
+                rgba(1, 1, 28, 0.98) 0%,
+                rgba(1, 1, 28, 0.85) 45%,
+                rgba(0, 140, 255, 0.3) 100%
+            ), url('fundo-estruturas.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -130,6 +131,7 @@
         .hero-content {
             max-width: 800px;
             text-align: left;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -138,14 +140,15 @@
             margin-bottom: 24px;
             font-weight: 700;
             letter-spacing: -1px;
-            text-shadow: 0 4px 12px rgba(1, 1, 28, 0.3);
+            text-shadow: 0 4px 15px rgba(1, 1, 28, 0.6);
         }
 
         .hero p {
             font-size: 1.4rem;
             font-weight: 300;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 40px;
+            text-shadow: 0 2px 8px rgba(1, 1, 28, 0.6);
         }
 
         .hero .btn-main {
@@ -289,7 +292,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* Placeholder visual imitando um render técnico em wireframe */
         .portfolio-placeholder {
             width: 100%;
             height: 100%;
@@ -328,7 +330,7 @@
             color: rgba(255,255,255,0.7);
         }
 
-        /* 6. RODAPÉ DE CONVERÇÃO / CONTACTOS */
+        /* 6. RODAPÉ DE CONVERSÃO / CONTACTOS */
         footer {
             background-color: var(--brand-dark-blue);
             color: white;
@@ -489,7 +491,7 @@
         </section>
     </div>
 
-    <!-- 5. PORTEFÓLIO (Espaços prontos para trocar por imagens futuramente) -->
+    <!-- 5. PORTEFÓLIO -->
     <section id="portfolio" class="content-section">
         <h2>Projetos em Destaque</h2>
         <div class="portfolio-grid">
