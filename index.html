@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horizons Engenharia | Soluções com BIM</title>
     
-    <!-- Favicon (Ícone da aba do navegador) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="horizon-logo-principal-1.png">
     <link rel="apple-touch-icon" href="horizon-logo-principal-1.png">
     
     <!-- Importação da fonte IBM Plex Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Variáveis de Cor da Marca */
         :root {
             --brand-dark-blue: #01011c;
             --brand-light-blue: #008cff;
@@ -37,17 +36,17 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Navbar */
+        /* Navbar Transparente e Flutuante (Estilo image_562a3e.png) */
         header {
-            background-color: var(--brand-dark-blue);
-            padding: 1.2rem 5%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .logo-container {
@@ -57,210 +56,250 @@
         }
 
         .logo-container img {
-            height: 45px;
+            height: 42px;
             width: auto;
         }
 
         .logo-text {
             color: white;
             font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+            font-size: 1.15rem;
+            letter-spacing: 1.5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
 
         nav a {
-            color: white;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            margin-left: 24px;
-            font-weight: 400;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
             transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--brand-light-blue);
+            color: white;
         }
 
-        /* Hero Section com Imagem de Fundo e Overlay */
+        /* Botão de Contacto do Menu */
+        .nav-btn {
+            background-color: var(--brand-light-blue);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 14px rgba(0, 140, 255, 0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #0077d6;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section Imersiva e Alinhada à Esquerda */
         .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
             background-image: linear-gradient(
-                rgba(1, 1, 28, 0.85), 
-                rgba(0, 140, 255, 0.6)
+                90deg,
+                rgba(1, 1, 28, 0.95) 0%,
+                rgba(1, 1, 28, 0.8) 40%,
+                rgba(0, 140, 255, 0.2) 100__
             ), url('fundo-estruturas.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: var(--brand-dark-blue);
             color: white;
-            padding: 160px 5%;
-            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            text-align: left;
         }
 
         .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 24px;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            text-shadow: 2px 2px 8px rgba(1, 1, 28, 0.5);
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 12px rgba(1, 1, 28, 0.3);
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 300;
-            margin-bottom: 40px;
-            text-shadow: 1px 1px 4px rgba(1, 1, 28, 0.4);
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 35px;
         }
 
-        .btn {
-            background-color: var(--brand-light-blue);
+        .hero .btn-main {
+            background-color: transparent;
             color: white;
-            padding: 16px 36px;
+            border: 2px solid var(--brand-light-blue);
+            padding: 14px 32px;
             text-decoration: none;
             border-radius: 4px;
             font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
             display: inline-block;
         }
 
-        .btn:hover {
-            background-color: #0077d6;
-            transform: translateY(-2px);
+        .hero .btn-main:hover {
+            background-color: var(--brand-light-blue);
+            box-shadow: 0 0 20px rgba(0, 140, 255, 0.6);
         }
 
-        /* Secção de Serviços */
+        /* Secção de Serviços Modernizada */
         .services {
-            padding: 100px 5%;
-            max-width: 1200px;
+            padding: 120px 8% 100px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .services h2 {
-            text-align: center;
             color: var(--brand-dark-blue);
-            font-size: 2.4rem;
+            font-size: 2.5rem;
             margin-bottom: 60px;
-            position: relative;
             font-weight: 700;
-        }
-
-        .services h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--brand-light-blue);
-            margin: 15px auto 0;
-            border-radius: 2px;
+            letter-spacing: -0.5px;
         }
 
         .service-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
 
         .service-card {
             background: white;
-            padding: 40px 30px;
-            border-radius: 6px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            border-top: 4px solid var(--brand-light-blue);
+            padding: 45px 35px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(1, 1, 28, 0.02);
+            border-left: 4px solid var(--brand-light-blue);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 40px rgba(1, 1, 28, 0.06);
         }
 
         .service-icon {
-            font-size: 2.6rem;
-            margin-bottom: 20px;
+            font-size: 2.4rem;
+            margin-bottom: 25px;
+            display: block;
         }
 
         .service-card h3 {
             color: var(--brand-dark-blue);
             margin-bottom: 15px;
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 600;
         }
 
         .service-card p {
             color: #555;
-            font-size: 1rem;
+            font-size: 0.98rem;
         }
 
         .service-card strong {
             color: var(--brand-dark-blue);
-            font-weight: 600;
         }
 
-        /* Rodapé / Contactos */
+        /* Rodapé / Contactos Mínimos */
         footer {
             background-color: var(--brand-dark-blue);
             color: white;
-            padding: 80px 5% 40px;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 100px 8% 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .contact-info {
-            max-width: 600px;
-            margin: 0 auto 40px;
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-info text-align: left; {
         }
 
         .contact-info h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 25px;
-            color: var(--brand-light-blue);
+            color: white;
             font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .contact-info .name {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            color: white;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .contact-info .role {
-            font-size: 1rem;
-            color: #a0a0b0;
-            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 30px;
         }
 
         .contact-info p {
             font-size: 1.1rem;
-            margin-bottom: 12px;
-            font-weight: 300;
         }
 
         .contact-info a {
-            color: white;
+            color: var(--brand-light-blue);
             text-decoration: none;
-            font-weight: 400;
+            font-weight: 500;
             transition: color 0.2s ease;
         }
         
         .contact-info a:hover {
-            color: var(--brand-light-blue);
+            color: white;
         }
 
         .copyright {
-            margin-top: 60px;
+            width: 100%;
+            margin-top: 80px;
             font-size: 0.85rem;
-            color: #606070;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255, 255, 255, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 30px;
+            text-align: center;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.8rem; }
+            header { padding: 1.5rem 5%; }
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.2rem; }
-            header { flex-direction: column; gap: 15px; text-align: center; }
-            nav a { margin: 0 10px; }
+            header { position: relative; background-color: var(--brand-dark-blue); padding: 1.2rem 5%; }
+            .hero { height: auto; padding: 100px 5%; align-items: center; }
+            .hero h1 { font-size: 2.3rem; }
+            nav { display: none; } /* Simplificação mobile */
+            .services { padding: 80px 5%; }
         }
     </style>
 </head>
@@ -273,14 +312,16 @@
         </div>
         <nav>
             <a href="#servicos">Serviços</a>
-            <a href="#contactos">Contactos</a>
+            <a href="#contactos" class="nav-btn">Contacto</a>
         </nav>
     </header>
 
     <section class="hero">
-        <h1>Engenharia inteligente, soluções com BIM.</h1>
-        <p>Inovação, rigor e otimização global de projetos.</p>
-        <a href="#contactos" class="btn">Solicitar Proposta</a>
+        <div class="hero-content">
+            <h1>We understand the importance of fast results and maximum returns.</h1>
+            <p>Engenharia inteligente, soluções com BIM.</p>
+            <a href="#servicos" class="btn-main">Conhecer Soluções</a>
+        </div>
     </section>
 
     <section id="servicos" class="services">
@@ -288,28 +329,28 @@
         <div class="service-grid">
             <!-- Serviço 1 -->
             <div class="service-card">
-                <div class="service-icon">🏗️</div>
+                <span class="service-icon">🏗️</span>
                 <h3>Projeto de Estruturas</h3>
                 <p>O nosso núcleo de especialidade. Dimensionamento avançado de estruturas em <strong>betão armado, pré-esforçado e estruturas metálicas</strong>. Projetos focados na otimização de materiais e total conformidade com os Eurocódigos.</p>
             </div>
 
             <!-- Serviço 2 -->
             <div class="service-card">
-                <div class="service-icon">📐</div>
+                <span class="service-icon">📐</span>
                 <h3>Projetos de Especialidades (Global)</h3>
                 <p>Asseguramos o desenvolvimento e entrega de <strong>todas as redes e especialidades técnicas</strong> necessárias para licenciamento e execução: redes hidráulicas, elétricas, telecomunicações (ITED), segurança (SCIE), acústica e térmica.</p>
             </div>
 
             <!-- Serviço 3 -->
             <div class="service-card">
-                <div class="service-icon">🔄</div>
+                <span class="service-icon">🔄</span>
                 <h3>Coordenação e Compatibilização</h3>
                 <p>Centralizamos a gestão de todas as equipas técnicas. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>, garantindo que todas as especialidades encaixam sem erros antes de chegar à obra.</p>
             </div>
 
             <!-- Serviço 4 -->
             <div class="service-card">
-                <div class="service-icon">💻</div>
+                <span class="service-icon">💻</span>
                 <h3>Modelação e Consultoria BIM</h3>
                 <p>Desenvolvimento de modelos virtuais inteligentes (LOD) para extração rigorosa de mapas de quantidades de ferro, betão e aço, reduzindo desvios orçamentais, imprevistos e otimizando a fase de construção.</p>
             </div>
@@ -317,12 +358,13 @@
     </section>
 
     <footer id="contactos">
-        <div class="contact-info">
-            <h3>Fale Connosco</h3>
-            <p class="name">Henrique Franzener Hyppolito</p>
-            <p class="role">Structural Engineer | BIM Manager</p>
-            <br>
-            <p><strong>Email:</strong> <a href="mailto:horizons.engenharia@gmail.com">horizons.engenharia@gmail.com</a></p>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Fale Connosco</h3>
+                <p class="name">Henrique Franzener Hyppolito</p>
+                <p class="role">Structural Engineer | BIM Manager</p>
+                <p><strong>Email:</strong> <a href="mailto:horizons.engenharia@gmail.com">horizons.engenharia@gmail.com</a></p>
+            </div>
         </div>
         <div class="copyright">
             &copy; 2026 Horizons Engenharia. Todos os direitos reservados.
