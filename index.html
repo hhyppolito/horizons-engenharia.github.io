@@ -122,7 +122,7 @@
                 rgba(0, 140, 255, 0.3) 100%
             ), url('fundo-estruturas.png?v=20260712');
             background-size: cover;
-            background-position: center;
+            background-position: -5vw center;
             background-repeat: no-repeat;
             background-color: var(--brand-dark-blue);
             color: white;
@@ -394,6 +394,10 @@
         @media (max-width: 992px) {
             .hero h1 { font-size: 2.8rem; }
             header { padding: 2rem 5% 0; }
+            .hero {
+                background-size: auto 100%;
+                background-position: center right;
+            }
         }
 
         @media (max-width: 768px) {
@@ -404,7 +408,11 @@
             }
             .hero { 
                 height: auto; 
-                padding: 160px 5% 100px; 
+                min-height: 500px;
+                padding: 160px 5% 100px;
+                background-size: contain;
+                background-position: center bottom;
+                background-repeat: no-repeat;
             }
             .hero h1 { font-size: 2.4rem; }
             nav { display: none; }
