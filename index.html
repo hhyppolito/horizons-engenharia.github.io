@@ -6,8 +6,8 @@
     <title>Horizons Engenharia | Soluções com BIM</title>
     
     <!-- Favicon (Ícone da aba do navegador) -->
-    <link rel="icon" type="image/png" href="horizon-logo-principal-1.png">
-    <link rel="apple-touch-icon" href="horizon-logo-principal-1.png">
+    <link rel="icon" type="image/png" href="horizon-logo-principal-1.png?v=20260711">
+    <link rel="apple-touch-icon" href="horizon-logo-principal-1.png?v=20260711">
     
     <!-- Importação da fonte IBM Plex Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +120,7 @@
                 rgba(1, 1, 28, 0.98) 0%,
                 rgba(1, 1, 28, 0.85) 45%,
                 rgba(0, 140, 255, 0.3) 100%
-            ), url('fundo-estruturas.png');
+            ), url('fundo-estruturas.png?v=20260711');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -417,7 +417,7 @@
     <!-- 1. NAVBAR TRANSPARENTE -->
     <header>
         <div class="logo-container">
-            <img src="horizon-logo-principal-1.png" alt="Horizons Engenharia Logo">
+            <img src="horizon-logo-principal-1.png?v=20260711" alt="Horizons Engenharia Logo">
             <div class="logo-text">HORIZONS ENGENHARIA</div>
         </div>
         <nav>
@@ -536,10 +536,11 @@
     <script>
         // Lista com os nomes exatos das suas imagens no GitHub
         // Pode adicionar mais imagens aqui seguindo a mesma estrutura
+        const cacheBuster = '?v=20260711';
         const imagensFundo = [
-            'fundo-estruturas.png',
-            'fundo-estruturas2.png',
-            'fundo-estruturas3.png.png'
+            `fundo-estruturas.png${cacheBuster}`,
+            `fundo-estruturas2.png${cacheBuster}`,
+            `fundo-estruturas3.png.png${cacheBuster}`
         ];
 
         let índiceAtual = 0;
