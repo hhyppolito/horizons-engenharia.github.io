@@ -37,17 +37,18 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 1. NAVBAR TRANSPARENTE & FLUTUANTE */
+        /* 1. NAVBAR TOTALMENTE TRANSPARENTE E FLUTUANTE */
         header {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 2rem 8%;
+            padding: 3rem 8% 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
+            background: transparent !important;
         }
 
         .logo-container {
@@ -106,7 +107,7 @@
             transform: translateY(-1px);
         }
 
-        /* 2. HERO SECTION IMERSIVA (OPÇÃO A - DARK TECH) */
+        /* 2. HERO SECTION IMERSIVA COM TRANSIÇÃO SUAVE */
         .hero {
             position: relative;
             height: 100vh;
@@ -114,24 +115,20 @@
             display: flex;
             align-items: center;
             padding: 0 8%;
-            /* O gradiente escuro funde-se com o fundo branco da imagem do modelo axonométrico */
-            background-image: linear-gradient(
-                90deg,
-                rgba(1, 1, 28, 0.98) 0%,
-                rgba(1, 1, 28, 0.85) 45%,
-                rgba(0, 140, 255, 0.3) 100%
-            ), url('fundo-estruturas.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-color: var(--brand-dark-blue);
             color: white;
+            /* Transição suave de 1 segundo ao trocar a imagem de fundo */
+            transition: background-image 1s ease-in-out; 
         }
 
         .hero-content {
             max-width: 800px;
             text-align: left;
             z-index: 2;
+            margin-top: 60px;
         }
 
         .hero h1 {
@@ -232,10 +229,6 @@
         .service-card p {
             color: #555;
             font-size: 0.98rem;
-        }
-
-        .service-card strong {
-            color: var(--brand-dark-blue);
         }
 
         /* 4. SECÇÃO MÉTODO DE TRABALHO */
@@ -392,15 +385,22 @@
             text-align: center;
         }
 
-        /* RESPONSIVIDADE */
+        /* RESPONSIVIDADE SEM CORTES NO TOPO */
         @media (max-width: 992px) {
             .hero h1 { font-size: 2.8rem; }
-            header { padding: 1.5rem 5%; }
+            header { padding: 2rem 5% 0; }
         }
 
         @media (max-width: 768px) {
-            header { position: relative; background-color: var(--brand-dark-blue); padding: 1.2rem 5%; }
-            .hero { height: auto; padding: 120px 5% 100px; }
+            header { 
+                position: absolute; 
+                background: transparent !important; 
+                padding: 2rem 5% 0; 
+            }
+            .hero { 
+                height: auto; 
+                padding: 160px 5% 100px; 
+            }
             .hero h1 { font-size: 2.4rem; }
             nav { display: none; }
             section.content-section { padding: 80px 5%; }
@@ -409,22 +409,22 @@
 </head>
 <body>
 
-    <!-- 1. NAVBAR -->
+    <!-- 1. NAVBAR TRANSPARENTE -->
     <header>
         <div class="logo-container">
             <img src="horizon-logo-principal-1.png" alt="Horizons Engenharia Logo">
             <div class="logo-text">HORIZONS ENGENHARIA</div>
         </div>
         <nav>
-            <a href="#servicos">Serviços</a>
+            <a href="#servicos">Services</a>
             <a href="#metodo">Metodologia</a>
             <a href="#portfolio">Portefólio</a>
             <a href="#contactos" class="nav-btn">Contacto</a>
         </nav>
     </header>
 
-    <!-- 2. HERO BANNER -->
-    <section class="hero">
+    <!-- 2. HERO BANNER (Dinamizado por JavaScript) -->
+    <section id="heroBanner" class="hero">
         <div class="hero-content">
             <h1>We understand the importance of fast results and maximum returns.</h1>
             <p>Engenharia inteligente, soluções com BIM.</p>
@@ -451,7 +451,7 @@
             <div class="service-card">
                 <span class="service-icon">🔄</span>
                 <h3>Coordenação e Compatibilização</h3>
-                <p>Centralizamos a gestão de todas as equipas técnicas. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>, garantindo que todas as especialidades encaixam sem erros antes de chegar à obra.</p>
+                <p>Centralizamos a gestão de todas as equipas técnicas. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>, encaixando todas as especialidades sem erros antes de chegar à obra.</p>
             </div>
 
             <div class="service-card">
@@ -485,7 +485,7 @@
                 <div class="process-step">
                     <div class="step-number">04</div>
                     <h3>Entrega Otimizada</h3>
-                    <p>Extração de peças desenhadas rigorosas e mapas precisos de quantidades, garantindo controlo financeiro real em obra.</p>
+                    <p>Extração de peças desenhadas rigorosas e mapas precisos de quantidades,axando controlo financeiro real em obra.</p>
                 </div>
             </div>
         </section>
@@ -526,6 +526,34 @@
             &copy; 2026 Horizons Engenharia. Todos os direitos reservados.
         </div>
     </footer>
+
+    <!-- LÓGICA JAVASCRIPT PARA ALTERNAR AS IMAGENS DE FUNDO -->
+    <script>
+        // Lista com os nomes exatos das suas imagens no GitHub
+        // Pode adicionar mais imagens aqui seguindo a mesma estrutura
+        const imagensFundo = [
+            'fundo-estruturas.png',
+            'fundo-estruturas2.png',
+            'fundo-estruturas3.png'
+        ];
+
+        let índiceAtual = 0;
+        const banner = document.getElementById('heroBanner');
+
+        function alternarImagem() {
+            // Avança para o próximo índice ou volta a zero se chegar ao fim da lista
+            índiceAtual = (índiceAtual + 1) % imagensFundo.length;
+            
+            // Aplica o novo fundo mantendo o gradiente elétrico idêntico por cima
+            banner.style.backgroundImage = `linear-gradient(90deg, rgba(1, 1, 28, 0.98) 0%, rgba(1, 1, 28, 0.85) 45%, rgba(0, 140, 255, 0.3) 100%), url('${imagensFundo[índiceAtual]}')`;
+        }
+
+        // Executa a primeira atribuição de fundo
+        banner.style.backgroundImage = `linear-gradient(90deg, rgba(1, 1, 28, 0.98) 0%, rgba(1, 1, 28, 0.85) 45%, rgba(0, 140, 255, 0.3) 100%), url('${imagensFundo[0]}')`;
+
+        // Ativa o temporizador para trocar a imagem automaticamente de 5 em 5 segundos (5000ms)
+        setInterval(alternarImagem, 5000);
+    </script>
 
 </body>
 </html>
