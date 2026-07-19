@@ -18,7 +18,7 @@
     <style>
         :root {
             color-scheme: light;
-            --brand-dark-blue: #ffffff;
+            --brand-dark-blue: #01011c;
             --heading-color: #01011c;
             --brand-light-blue: #008cff;
             --brand-off-white: #f9f9f9;
@@ -377,6 +377,72 @@
             color: rgba(255,255,255,0.7);
         }
 
+        /* 5b. VISUALIZADOR IFC */
+        .ifc-panel {
+            background: white;
+            border-radius: 4px;
+            border-left: 4px solid var(--brand-light-blue);
+            box-shadow: 0 10px 30px rgba(1, 1, 28, 0.04);
+            padding: 30px;
+        }
+
+        .ifc-controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .ifc-btn {
+            background-color: var(--brand-light-blue);
+            color: white;
+            border: none;
+            padding: 12px 26px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-family: inherit;
+        }
+
+        .ifc-btn:hover {
+            background-color: #0077d6;
+            transform: translateY(-1px);
+        }
+
+        .ifc-btn.secondary {
+            background-color: transparent;
+            color: var(--brand-light-blue);
+            border: 2px solid var(--brand-light-blue);
+            padding: 10px 24px;
+        }
+
+        .ifc-btn.secondary:hover {
+            background-color: rgba(0, 140, 255, 0.08);
+        }
+
+        .ifc-status {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .ifc-viewer-container {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #f4f6f8;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        @media (max-width: 768px) {
+            .ifc-viewer-container { height: 420px; }
+        }
+
         /* 6. RODAPÉ DE CONVERSÃO / CONTACTOS */
         footer {
             background-color: var(--brand-dark-blue);
@@ -575,6 +641,7 @@
             <a href="#servicos">Services</a>
             <a href="#metodo">Metodologia</a>
             <a href="#portfolio">Portefólio</a>
+            <a href="#visualizador">Visualizador IFC</a>
             <a href="#contactos" class="nav-btn">Contacto</a>
         </nav>
     </header>
@@ -677,6 +744,142 @@
             </div>
         </div>
     </section>
+
+    <!-- 5b. VISUALIZADOR IFC -->
+    <section id="visualizador" class="content-section">
+        <h2>Visualizador IFC</h2>
+        <div class="ifc-panel">
+            <p style="margin-bottom: 24px; color: #555;">Carrega um ficheiro IFC do teu computador para o visualizares diretamente no browser, sem instalar nada. Também podes experimentar com um modelo de demonstração.</p>
+            <div class="ifc-controls">
+                <button id="ifc-load-btn" class="ifc-btn" type="button">Carregar ficheiro IFC</button>
+                <input id="ifc-file-input" type="file" accept=".ifc" style="display:none;">
+                <button id="ifc-demo-btn" class="ifc-btn secondary" type="button">Ver modelo de exemplo</button>
+                <span id="ifc-status" class="ifc-status">A iniciar visualizador...</span>
+            </div>
+            <div id="ifc-viewer-container" class="ifc-viewer-container"></div>
+        </div>
+    </section>
+
+    <!-- Bibliotecas do visualizador IFC (That Open Company / web-ifc), carregadas via CDN sem necessidade de build -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://esm.sh/three@0.185.1",
+            "@thatopen/components": "https://esm.sh/@thatopen/components@3.4.6?external=three"
+        }
+    }
+    </script>
+    <script type="module">
+        import * as OBC from "@thatopen/components";
+
+        const container = document.getElementById("ifc-viewer-container");
+        const statusEl = document.getElementById("ifc-status");
+        const loadBtn = document.getElementById("ifc-load-btn");
+        const fileInput = document.getElementById("ifc-file-input");
+        const demoBtn = document.getElementById("ifc-demo-btn");
+
+        let ifcLoader;
+
+        async function initViewer() {
+            const components = new OBC.Components();
+
+            const worlds = components.get(OBC.Worlds);
+            const world = worlds.create();
+
+            world.scene = new OBC.SimpleScene(components);
+            world.scene.setup();
+            world.scene.three.background = null;
+
+            world.renderer = new OBC.SimpleRenderer(components, container);
+            world.camera = new OBC.OrthoPerspectiveCamera(components);
+            await world.camera.controls.setLookAt(78, 20, -2.2, 26, -4, 25);
+
+            components.init();
+            components.get(OBC.Grids).create(world);
+
+            ifcLoader = components.get(OBC.IfcLoader);
+            await ifcLoader.setup({
+                autoSetWasm: false,
+                wasm: {
+                    path: "https://unpkg.com/web-ifc@0.0.77/",
+                    absolute: true,
+                },
+            });
+
+            const workerUrl = await OBC.FragmentsManager.getWorker();
+            const fragments = components.get(OBC.FragmentsManager);
+            fragments.init(workerUrl);
+
+            world.camera.controls.addEventListener("update", () => fragments.core.update());
+
+            fragments.list.onItemSet.add(({ value: model }) => {
+                model.useCamera(world.camera.three);
+                world.scene.three.add(model.object);
+                fragments.core.update(true);
+            });
+
+            fragments.core.models.materials.list.onItemSet.add(({ value: material }) => {
+                if (!("isLodMaterial" in material && material.isLodMaterial)) {
+                    material.polygonOffset = true;
+                    material.polygonOffsetUnits = 1;
+                    material.polygonOffsetFactor = Math.random();
+                }
+            });
+
+            statusEl.textContent = "Visualizador pronto. Carrega um ficheiro IFC.";
+        }
+
+        const viewerReady = initViewer().catch((err) => {
+            console.error(err);
+            statusEl.textContent = "Não foi possível iniciar o visualizador (ver consola).";
+        });
+
+        async function loadIfcBuffer(buffer, name) {
+            loadBtn.disabled = true;
+            demoBtn.disabled = true;
+            try {
+                await ifcLoader.load(buffer, false, name, {
+                    processData: {
+                        progressCallback: (progress) => {
+                            statusEl.textContent = `A converter: ${Math.round(progress * 100)}%`;
+                        },
+                    },
+                });
+                statusEl.textContent = `Modelo "${name}" carregado.`;
+            } catch (err) {
+                console.error(err);
+                statusEl.textContent = "Erro ao carregar o modelo IFC (ver consola).";
+            } finally {
+                loadBtn.disabled = false;
+                demoBtn.disabled = false;
+            }
+        }
+
+        loadBtn.addEventListener("click", () => fileInput.click());
+
+        fileInput.addEventListener("change", async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            statusEl.textContent = "A carregar ficheiro...";
+            await viewerReady;
+            const data = await file.arrayBuffer();
+            await loadIfcBuffer(new Uint8Array(data), file.name.replace(/\.ifc$/i, ""));
+            fileInput.value = "";
+        });
+
+        demoBtn.addEventListener("click", async () => {
+            await viewerReady;
+            statusEl.textContent = "A transferir modelo de exemplo...";
+            try {
+                const response = await fetch("https://thatopen.github.io/engine_components/resources/ifc/school_str.ifc");
+                const data = await response.arrayBuffer();
+                await loadIfcBuffer(new Uint8Array(data), "school_str");
+            } catch (err) {
+                console.error(err);
+                statusEl.textContent = "Não foi possível transferir o modelo de exemplo (ver consola).";
+            }
+        });
+    </script>
 
     <!-- 6. CONTACTOS -->
     <footer id="contactos">
