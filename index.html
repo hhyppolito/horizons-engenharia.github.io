@@ -149,13 +149,13 @@
 
         /* --- ATUALIZAÇÃO: MELHORIA NA INTEGRAÇÃO DAS IMAGENS --- */
         .hero-visual {
-            position: absolute;
-            top: 50%;
-            right: -2rem;
-            transform: translateY(-50%);
-            width: 78%;
-            max-width: 680px;
-            height: 82%;
+            /*position: absolute;*/
+            top: 21%;
+            /*right: -2rem;*/
+            /*transform: translateY(-50%);*/
+            /*width: 78%;*/
+            /*max-width: 680px;*/
+            /*height: 82%;*/
             background-color: transparent;
             background-size: 98% auto;
             background-position: right center;
@@ -423,6 +423,16 @@
             background-color: rgba(0, 140, 255, 0.08);
         }
 
+        .ifc-file-input {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            opacity: 0;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
         .ifc-status {
             font-size: 0.9rem;
             color: #666;
@@ -540,11 +550,11 @@
 
             .hero-visual {
                 position: absolute;
-                top: 50%;
+                /*top: 50%;*/   
                 /* bring the visual more into view so it is not cut off */
                 right: -10rem;
-                transform: translateY(-50%);
-                width: 72%;
+                transform: translateY(-30%);
+                width: 90%;
                 max-width: 720px;
                 height: 82%;
                 min-height: 480px;
@@ -751,7 +761,6 @@
             <p style="margin-bottom: 24px; color: #555;">Carrega um ficheiro IFC do teu computador para o visualizares diretamente no browser, sem instalar nada. Também podes experimentar com um modelo de demonstração.</p>
             <div class="ifc-controls">
                 <button id="ifc-load-btn" class="ifc-btn" type="button">Carregar ficheiro IFC</button>
-                <input id="ifc-file-input" type="file" accept=".ifc" style="display:none;">
                 <button id="ifc-demo-btn" class="ifc-btn secondary" type="button">Ver modelo de exemplo</button>
                 <span id="ifc-status" class="ifc-status">A iniciar visualizador...</span>
             </div>
@@ -764,6 +773,7 @@
     {
         "imports": {
             "three": "https://esm.sh/three@0.185.1",
+            "three/": "https://esm.sh/three@0.185.1/",
             "@thatopen/components": "https://esm.sh/@thatopen/components@3.4.6?external=three"
         }
     }
@@ -774,10 +784,17 @@
         const container = document.getElementById("ifc-viewer-container");
         const statusEl = document.getElementById("ifc-status");
         const loadBtn = document.getElementById("ifc-load-btn");
-        const fileInput = document.getElementById("ifc-file-input");
         const demoBtn = document.getElementById("ifc-demo-btn");
 
         let ifcLoader;
+        const fileInput = document.createElement("input");
+        fileInput.type = "file";
+        fileInput.accept = ".ifc";
+        fileInput.style.position = "fixed";
+        fileInput.style.left = "-9999px";
+        fileInput.style.top = "-9999px";
+        fileInput.style.opacity = "0";
+        document.body.appendChild(fileInput);
 
         async function initViewer() {
             const components = new OBC.Components();
