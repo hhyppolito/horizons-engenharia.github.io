@@ -16,7 +16,7 @@
     
     <style>
         :root {
-            --brand-dark-blue: #01011c;
+            --brand-dark-blue: #ffffff;
             --brand-light-blue: #008cff;
             --brand-off-white: #f9f9f9;
             --brand-dark-grey: #202020;
@@ -110,30 +110,76 @@
         /* 2. HERO SECTION IMERSIVA COM TRANSIÇÃO SUAVE */
         .hero {
             position: relative;
-            height: 100vh;
-            min-height: 650px;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 0 8%;
-            background-image: linear-gradient(
-                90deg,
-                rgba(1, 1, 28, 0.98) 0%,
-                rgba(1, 1, 28, 0.85) 45%,
-                rgba(0, 140, 255, 0.3) 100%
-            ), url('fundo-estruturas.png?v=20260712');
-            background-size: cover, 800px auto;
-            background-position: center, -100px center;
-            background-repeat: no-repeat;
+            padding: 120px 8% 80px;
             background-color: var(--brand-dark-blue);
             color: white;
-            transition: background-image 1s ease-in-out;
+            overflow: hidden;
+            isolation: isolate; /* contain blend modes inside the hero */
         }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(1, 1, 28, 0.98) 0%,
+                rgba(1, 1, 28, 0.85) 45%,
+                rgba(0, 140, 255, 0.28) 100%
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 48px;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* --- ATUALIZAÇÃO: MELHORIA NA INTEGRAÇÃO DAS IMAGENS --- */
+        .hero-visual {
+            position: absolute;
+            top: 50%;
+            right: -2rem;
+            transform: translateY(-50%);
+            width: 78%;
+            max-width: 680px;
+            height: 82%;
+            background-color: transparent;
+            background-size: 98% auto;
+            background-position: right center;
+            background-repeat: no-repeat;
+            opacity: 1;
+            pointer-events: none;
+            z-index: 0;
+            overflow: visible;
+            /* Blend the image with the background so white areas become see-through */
+            mix-blend-mode: multiply;
+            /*filter: saturate(1) contrast(0.98) brightness(0.98);*/
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.12);
+            pointer-events: none;
+            z-index: 0;
+        }
         .hero-content {
-            max-width: 800px;
-            text-align: left;
+            max-width: 820px;
+            text-align: center;
             z-index: 2;
-            margin-top: 60px;
+            margin-top: 0;
         }
 
         .hero h1 {
@@ -391,30 +437,125 @@
         }
 
         /* RESPONSIVIDADE SEM CORTES NO TOPO */
+        @media (min-width: 769px) {
+            /* Desktop: keep hero base color, put horizontal gradient in the ::before overlay */
+            .hero {
+                min-height: 100vh;
+                padding: 0 8%;
+                background: var(--brand-dark-blue);
+            }
+
+            .hero::before {
+                /* override the overlay to be horizontal on large screens */
+                background: linear-gradient(
+                    90deg,
+                    rgba(1, 1, 28, 0.98) 0%,
+                    rgba(1, 1, 28, 0.85) 45%,
+                    rgba(0, 140, 255, 0.3) 100%
+                );
+            }
+
+            .hero-inner {
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 80px;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+                max-width: 560px;
+                text-align: left;
+                order: 1;
+            }
+
+            .hero-visual {
+                position: absolute;
+                top: 50%;
+                /* bring the visual more into view so it is not cut off */
+                right: -2rem;
+                transform: translateY(-50%);
+                width: 72%;
+                max-width: 720px;
+                height: 82%;
+                min-height: 480px;
+                background-size: 100% auto;
+                background-position: right center;
+                z-index: 0;
+                overflow: visible;
+            }
+        }
+
         @media (max-width: 992px) {
             .hero h1 { font-size: 2.8rem; }
             header { padding: 2rem 5% 0; }
             .hero {
-                background-size: cover, 600px auto;
-                background-position: center, -75px center;
+                padding: 110px 5% 70px;
+            }
+            .hero-visual {
+                top: 0;
+                right: 0;
+                transform: translateY(0);
+                width: 88%;
+                height: 88%;
+                max-width: 660px;
+                background-size: 100% auto;
+                background-position: center top;
             }
         }
 
         @media (max-width: 768px) {
-            header { 
-                position: absolute; 
-                background: transparent !important; 
-                padding: 2rem 5% 0; 
+            header {
+                position: absolute;
+                background: transparent !important;
+                padding: 2rem 5% 0;
+                justify-content: center;
             }
-            .hero { 
-                height: auto; 
-                min-height: 550px;
-                padding: 160px 5% 100px;
-                background-size: cover, 400px auto;
-                background-position: center, -50px center;
+            .logo-container {
+                justify-content: center;
+                width: 100%;
             }
-            .hero h1 { font-size: 2.4rem; }
+            .logo-text {
+                display: none;
+            }
             nav { display: none; }
+            .hero {
+                padding: 130px 5% 80px;
+                min-height: auto;
+            }
+            .hero-inner {
+                flex-direction: column;
+                gap: 24px;
+                align-items: center;
+            }
+            .hero-content {
+                width: 100%;
+                padding: 0;
+                margin-top: -4rem;
+            }
+            .hero h1 { font-size: 2rem; }
+            .hero-visual {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                width: 100%;
+                height: auto;
+                max-width: 640px;
+                min-height: 360px;
+                background-size: 100% auto;
+                background-position: center top;
+            }
+            /* Mobile: invert overlay gradient (lighter at top, darker at bottom) */
+            .hero::before {
+                background: linear-gradient(
+                    180deg,
+                    rgba(0, 140, 255, 0.18) 0%,
+                    rgba(1, 1, 28, 0.85) 60%,
+                    rgba(1, 1, 28, 0.98) 100%
+                );
+            }
             section.content-section { padding: 80px 5%; }
         }
     </style>
@@ -437,10 +578,14 @@
 
     <!-- 2. HERO BANNER (Dinamizado por JavaScript) -->
     <section id="heroBanner" class="hero">
-        <div class="hero-content">
-            <h1>We understand the importance of fast results and maximum returns.</h1>
-            <p>Engenharia inteligente, soluções com BIM.</p>
-            <a href="#servicos" class="btn-main">Conhecer Soluções</a>
+        <div class="hero-inner">
+            <!-- A imagem é carregada via JavaScript nesta div -->
+            <div class="hero-visual" aria-hidden="true"></div>
+            <div class="hero-content">
+                <h1>We understand the importance of fast results and maximum returns.</h1>
+                <p>Engenharia inteligente, soluções em BIM.</p>
+                <a href="#servicos" class="btn-main">Conhecer Soluções</a>
+            </div>
         </div>
     </section>
 
@@ -451,25 +596,31 @@
             <div class="service-card">
                 <span class="service-icon">🏗️</span>
                 <h3>Projeto de Estruturas</h3>
-                <p>O nosso núcleo de especialidade. Dimensionamento avançado de estruturas em <strong>betão armado, pré-esforçado e estruturas metálicas</strong>. Projetos focados na otimização de materiais e total conformidade com os Eurocódigos.</p>
+                <p>O nosso núcleo de especialidade. Possuimos corpo técnico especializado em dimensionamento avançado de estruturas em <strong>concreto armado, pré-fabricados, pré-esforçados, madeiras eestruturas metálicas</strong>. Projetos focados na otimização de materiais e total conformidade com as normas Brasileiras e internacionais.</p>
             </div>
 
             <div class="service-card">
                 <span class="service-icon">📐</span>
-                <h3>Projetos de Especialidades (Global)</h3>
-                <p>Asseguramos o desenvolvimento e entrega de <strong>todas as redes e especialidades técnicas</strong> necessárias para licenciamento e execução: redes hidráulicas, elétricas, telecomunicações (ITED), segurança (SCIE), acústica e térmica.</p>
+                <h3>Projetos MEP</h3>
+                <p>Asseguramos o desenvolvimento e entrega de <strong>todas as redes e especialidades técnicas</strong> necessárias: redes hidráulicas, elétricas, telecomunicações (TELECOM), segurança contra incêndio (SCI), acústica e térmica.</p>
             </div>
 
             <div class="service-card">
                 <span class="service-icon">🔄</span>
                 <h3>Coordenação e Compatibilização</h3>
-                <p>Centralizamos a gestão de todas as equipas técnicas. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>, encaixando todas as especialidades sem erros antes de chegar à obra.</p>
+                <p>Centralizamos a gestão de todas as engenharias. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>, compatibilizando todas as especialidades antes de chegarem à obra.</p>
             </div>
 
             <div class="service-card">
                 <span class="service-icon">💻</span>
-                <h3>Modelação e Consultoria BIM</h3>
-                <p>Desenvolvimento de modelos virtuais inteligentes (LOD) para extração rigorosa de mapas de quantidades de ferro, betão e aço, reduzindo desvios orçamentais, imprevistos e otimizando a fase de construção.</p>
+                <h3>Modelação, Medições</h3>
+                <p>Desenvolvimento de modelos inteligentes para extração rigorosa de mapas de quantidades com recurso a processos automatizados e em comunicação direta os modelos BIM, assegurando orçamentos precisos e otimizando a fase de construção.</p>
+            </div>
+            
+            <div class="service-card">
+                <span class="service-icon">🏛️</span>
+                <h3>Consultoria BIM</h3>
+                <p>Assessoria especializada na implementação e gestão de projetos BIM, garantindo a otimização dos processos e a conformidade com as melhores práticas do setor.</p>
             </div>
         </div>
     </section>
@@ -487,12 +638,12 @@
                 <div class="process-step">
                     <div class="step-number">02</div>
                     <h3>Modelação & Cálculo</h3>
-                    <p>Desenvolvimento integrado do modelo estrutural e coordenação paralela das restantes redes técnicas de engenharia.</p>
+                    <p>Desenvolvimento integrado do modelos BIM e de dimensioanamento (Estrutural e MEP) e coordenação paralela entre engenharias.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">03</div>
                     <h3>Auditoria BIM</h3>
-                    <p>Cruzamento de dados tridimensionais automatizado (<em>clash detection</em>) para a completa eliminação de erros e omissões.</p>
+                    <p>Validação dos modelos BIM com de acordo com as normas mais atuais, critérios internos e requisitos do projeto.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">04</div>
@@ -539,32 +690,29 @@
         </div>
     </footer>
 
-    <!-- LÓGICA JAVASCRIPT PARA ALTERNAR AS IMAGENS DE FUNDO -->
+    <!-- LÓGICA JAVASCRIPT PARA ALTERNAR AS IMAGENS DE FUNDO (Inalterado) -->
     <script>
         // Lista com os nomes exatos das suas imagens no GitHub
-        // Pode adicionar mais imagens aqui seguindo a mesma estrutura
         const cacheBuster = '?v=20260712';
         const imagensFundo = [
             `fundo-estruturas.png${cacheBuster}`,
             `fundo-estruturas2.png${cacheBuster}`,
-            `fundo-estruturas3.png.png${cacheBuster}`
+            `fundo-estruturas3.png${cacheBuster}`
         ];
 
         let índiceAtual = 0;
-        const banner = document.getElementById('heroBanner');
+        const bannerVisual = document.querySelector('.hero-visual');
 
         function alternarImagem() {
-            // Avança para o próximo índice ou volta a zero se chegar ao fim da lista
             índiceAtual = (índiceAtual + 1) % imagensFundo.length;
-            
-            // Aplica o novo fundo mantendo o gradiente elétrico idêntico por cima
-            banner.style.backgroundImage = `linear-gradient(90deg, rgba(1, 1, 28, 0.98) 0%, rgba(1, 1, 28, 0.85) 45%, rgba(0, 140, 255, 0.3) 100%), url('${imagensFundo[índiceAtual]}')`;
+            // Define a nova imagem mantendo as configurações de máscara do CSS
+            bannerVisual.style.backgroundImage = `url('${imagensFundo[índiceAtual]}')`;
         }
 
-        // Executa a primeira atribuição de fundo
-        banner.style.backgroundImage = `linear-gradient(90deg, rgba(1, 1, 28, 0.98) 0%, rgba(1, 1, 28, 0.85) 45%, rgba(0, 140, 255, 0.3) 100%), url('${imagensFundo[0]}')`;
+        // Carrega a primeira imagem imediatamente
+        bannerVisual.style.backgroundImage = `url('${imagensFundo[0]}')`;
 
-        // Ativa o temporizador para trocar a imagem automaticamente de 5 em 5 segundos (5000ms)
+        // Ativa o temporizador para trocar a imagem automaticamente de 5 em 5 segundos
         setInterval(alternarImagem, 5000);
     </script>
 
