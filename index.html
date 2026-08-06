@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -665,9 +665,9 @@
             <div class="logo-text">HORIZONS ENGENHARIA</div>
         </div>
         <nav>
-            <a href="#servicos">Services</a>
+            <a href="#servicos">Serviços</a>
             <a href="#metodo">Metodologia</a>
-            <a href="#portfolio">Portefólio</a>
+            <a href="#portfolio">Portfólio</a>
             <a href="#visualizador">Visualizador IFC</a>
             <a href="#contatos" class="nav-btn">contato</a>
         </nav>
@@ -692,7 +692,7 @@
             <div class="service-card">
                 <span class="service-icon">🏗️</span>
                 <h3>Projeto de Estruturas</h3>
-                <p>O nosso núcleo de especialidade. Possuimos corpo técnico especializado em dimensionamento avançado de estruturas em <strong>concreto armado, pré-fabricados, pré-esforçados, madeiras e estruturas metálicas</strong>. Projetos focados na otimização de materiais e total conformidade com as normas Brasileiras e internacionais.</p>
+                <p>O nosso núcleo de especialidade. Possuímos corpo técnico especializado em dimensionamento avançado de estruturas em <strong>concreto armado, pré-fabricados, pré-esforçados, madeiras e estruturas metálicas</strong>. Projetos focados na otimização de materiais e total conformidade com as normas brasileiras e internacionais.</p>
             </div>
 
             <div class="service-card">
@@ -710,7 +710,7 @@
             <div class="service-card">
                 <span class="service-icon">💻</span>
                 <h3>Modelação, Medições</h3>
-                <p>Desenvolvimento de modelos inteligentes para extração rigorosa de mapas de quantidades com recurso a processos automatizados e em comunicação direta os modelos BIM, assegurando orçamentos precisos e otimizando a fase de construção.</p>
+                <p>Desenvolvimento de modelos inteligentes para extração rigorosa de mapas de quantidades com recurso a processos automatizados e em comunicação direta com os modelos BIM, assegurando orçamentos precisos e otimizando a fase de construção.</p>
             </div>
             
             <div class="service-card">
@@ -729,7 +729,7 @@
                 <div class="process-step">
                     <div class="step-number">01</div>
                     <h3>Análise Base</h3>
-                    <p>Receção e auditoria crítica do projeto de arquitetura para alinhar premissas e detetar constrangimentos iniciais.</p>
+                    <p>Recepção e auditoria crítica do projeto de arquitetura para alinhar premissas e detectar constrangimentos iniciais.</p>
                 </div>
                 <div class="process-step">
                     <div class="step-number">02</div>
@@ -744,7 +744,7 @@
                 <div class="process-step">
                     <div class="step-number">04</div>
                     <h3>Entrega Otimizada</h3>
-                    <p>Extração de peças desenhadas rigorosas e mapas precisos de quantidades, garantindo controlo financeiro real em obra.</p>
+                    <p>Extração de peças desenhadas rigorosas e mapas precisos de quantidades, garantindo controle financeiro real em obra.</p>
                 </div>
             </div>
         </section>
@@ -800,13 +800,13 @@
                         <path d="M14.2 14.2l4.2 4.2"/>
                     </svg>
                     <h3>Compatibilização de Projetos</h3>
-                    <p>Garantimos a integração entre os projetos e evitando conflitos durante a fase de execução.</p>
+                    <p>Garantimos a integração entre os projetos, evitando conflitos durante a fase de execução.</p>
                 </div>
             </div>
 
-            <!-- CARD 4: R&D (Pesquisa & Desenvolvimento) -->
+            <!-- CARD 4: P&D (Pesquisa & Desenvolvimento) -->
             <div class="portfolio-item">
-                <img src="fundo-estruturas4.png?v=20260712" alt="R&D" class="portfolio-bg">
+                <img src="fundo-estruturas4.png?v=20260712" alt="P&D" class="portfolio-bg">
                 <div class="portfolio-overlay">
                     <!-- Ícone Programação / Código </> -->
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:48px; height:48px; margin-bottom:15px; opacity:0.9; stroke:var(--brand-light-blue);">
@@ -814,7 +814,7 @@
                         <polyline points="8 6 2 12 8 18"/>
                         <line x1="14" y1="4" x2="10" y2="20"/>
                     </svg>
-                    <h3>R&D</h3>
+                    <h3>P&D</h3>
                     <p>Estamos em desenvolvimento constante, focados na melhoria contínua dos nossos processos.</p>
                 </div>
             </div>
@@ -826,11 +826,11 @@
     <section id="visualizador" class="content-section">
         <h2>Visualizador IFC</h2>
         <div class="ifc-panel">
-            <p style="margin-bottom: 24px; color: #555;">Carrega um ficheiro IFC do teu computador para o visualizares diretamente no browser, sem instalar nada. Também podes experimentar com um modelo de demonstração.</p>
+            <p style="margin-bottom: 24px; color: #555;">Carrega um arquivo IFC do seu computador para visualizá-lo diretamente no navegador, sem instalar nada. Também pode experimentar um modelo de demonstração.</p>
             <div class="ifc-controls">
-                <button id="ifc-load-btn" class="ifc-btn" type="button">Carregar ficheiro IFC</button>
+                <button id="ifc-load-btn" class="ifc-btn" type="button">Carregar arquivo IFC</button>
                 <button id="ifc-demo-btn" class="ifc-btn secondary" type="button">Ver modelo de exemplo</button>
-                <span id="ifc-status" class="ifc-status">A iniciar visualizador...</span>
+                <span id="ifc-status" class="ifc-status">Iniciando visualizador...</span>
             </div>
             <div id="ifc-viewer-container" class="ifc-viewer-container"></div>
         </div>
@@ -914,12 +914,12 @@
                 }
             });
 
-            statusEl.textContent = "Visualizador pronto. Carrega um ficheiro IFC.";
+            statusEl.textContent = "Visualizador pronto. Carrega um arquivo IFC.";
         }
 
         const viewerReady = initViewer().catch((err) => {
             console.error(err);
-            statusEl.textContent = "Não foi possível iniciar o visualizador (ver consola).";
+            statusEl.textContent = "Não foi possível iniciar o visualizador (ver console).";
         });
 
         async function loadIfcBuffer(buffer, name) {
@@ -929,14 +929,14 @@
                 await ifcLoader.load(buffer, false, name, {
                     processData: {
                         progressCallback: (progress) => {
-                            statusEl.textContent = `A converter: ${Math.round(progress * 100)}%`;
+                            statusEl.textContent = `Convertendo: ${Math.round(progress * 100)}%`;
                         },
                     },
                 });
                 statusEl.textContent = `Modelo "${name}" carregado.`;
             } catch (err) {
                 console.error(err);
-                statusEl.textContent = "Erro ao carregar o modelo IFC (ver consola).";
+                statusEl.textContent = "Erro ao carregar o modelo IFC (ver console).";
             } finally {
                 loadBtn.disabled = false;
                 demoBtn.disabled = false;
@@ -948,7 +948,7 @@
         fileInput.addEventListener("change", async (event) => {
             const file = event.target.files[0];
             if (!file) return;
-            statusEl.textContent = "A carregar ficheiro...";
+            statusEl.textContent = "Carregando arquivo...";
             await viewerReady;
             const data = await file.arrayBuffer();
             await loadIfcBuffer(new Uint8Array(data), file.name.replace(/\.ifc$/i, ""));
@@ -957,14 +957,14 @@
 
         demoBtn.addEventListener("click", async () => {
             await viewerReady;
-            statusEl.textContent = "A transferir modelo de exemplo...";
+            statusEl.textContent = "Baixando modelo de exemplo...";
             try {
                 const response = await fetch("https://thatopen.github.io/engine_components/resources/ifc/school_str.ifc");
                 const data = await response.arrayBuffer();
                 await loadIfcBuffer(new Uint8Array(data), "school_str");
             } catch (err) {
                 console.error(err);
-                statusEl.textContent = "Não foi possível transferir o modelo de exemplo (ver consola).";
+                statusEl.textContent = "Não foi possível baixar o modelo de exemplo (ver console).";
             }
         });
     </script>
