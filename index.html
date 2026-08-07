@@ -1016,7 +1016,8 @@
         const heroSection = document.getElementById('heroBanner');
 
         let pixels = [];
-        const pixelCount = 75; // Quantidade de píxeis na animação
+        const pixelCount = 110; // Quantidade de píxeis na animação
+        const linkDistance = 130; // Distância máxima para ligar dois píxeis por uma linha
 
          // Cores da marca + Verde Digital
         const colors = [
@@ -1027,7 +1028,7 @@
             'rgba(0, 255, 170, '    /* Verde Ciano Neon (#00ffaa) */
         ];
 
-        let mouse = { x: null, y: null, radius: 160 };
+        let mouse = { x: null, y: null, radius: 220 };
 
         heroSection.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
@@ -1052,12 +1053,12 @@
                     }
 
                     reset() {
-                        this.size = Math.random() * 6 + 4; // Quadrados de 4px a 10px
+                        this.size = Math.random() * 7 + 4; // Quadrados de 4px a 11px
                         this.x = Math.random() * canvas.width;
                         this.y = Math.random() * canvas.height;
-                        this.vx = (Math.random() - 0.5) * 0.7;
-                        this.vy = (Math.random() - 0.5) * 0.7;
-                        this.baseAlpha = Math.random() * 0.45 + 0.15;
+                        this.vx = (Math.random() - 0.5) * 0.9;
+                        this.vy = (Math.random() - 0.5) * 0.9;
+                        this.baseAlpha = Math.random() * 0.5 + 0.25;
                         this.alpha = this.baseAlpha;
                         
                         // Distribuição inteligente de cores: ~20% de hipótese de ser um píxel verde
@@ -1087,10 +1088,10 @@
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < mouse.radius) {
-                        this.alpha = Math.min(1, this.baseAlpha + (1 - distance / mouse.radius) * 0.6);
+                        this.alpha = Math.min(1, this.baseAlpha + (1 - distance / mouse.radius) * 0.75);
                         let angle = Math.atan2(dy, dx);
-                        this.x -= Math.cos(angle) * 1.2;
-                        this.y -= Math.sin(angle) * 1.2;
+                        this.x -= Math.cos(angle) * 1.8;
+                        this.y -= Math.sin(angle) * 1.8;
                     } else {
                         this.alpha = this.baseAlpha;
                     }
@@ -1100,9 +1101,53 @@
             }
 
             draw() {
+                ctx.save();
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = `${this.color}0.9)`;
                 ctx.fillStyle = `${this.color}${this.alpha})`;
                 // Desenha os blocos em formato de píxeis (quadrados)
                 ctx.fillRect(this.x, this.y, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        // Liga píxeis próximos entre si, criando um efeito de rede/circuito
+        function connectPixels() {
+            for (let i = 0; i < pixels.length; i++) {
+                for (let j = i + 1; j < pixels.length; j++) {
+                    const dx = pixels[i].x - pixels[j].x;
+                    const dy = pixels[i].y - pixels[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < linkDistance) {
+                        const opacity = (1 - distance / linkDistance) * 0.4;
+                        ctx.strokeStyle = `rgba(0, 140, 255, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(pixels[i].x + pixels[i].size / 2, pixels[i].y + pixels[i].size / 2);
+                        ctx.lineTo(pixels[j].x + pixels[j].size / 2, pixels[j].y + pixels[j].size / 2);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Liga os píxeis próximos ao cursor, reforçando a interatividade
+            if (mouse.x !== null && mouse.y !== null) {
+                pixels.forEach(p => {
+                    const dx = mouse.x - p.x;
+                    const dy = mouse.y - p.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius) {
+                        const opacity = (1 - distance / mouse.radius) * 0.55;
+                        ctx.strokeStyle = `rgba(0, 230, 118, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(mouse.x, mouse.y);
+                        ctx.lineTo(p.x + p.size / 2, p.y + p.size / 2);
+                        ctx.stroke();
+                    }
+                });
             }
         }
 
@@ -1116,10 +1161,9 @@
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            pixels.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            pixels.forEach(p => p.update());
+            connectPixels();
+            pixels.forEach(p => p.draw());
 
             requestAnimationFrame(animate);
         }
