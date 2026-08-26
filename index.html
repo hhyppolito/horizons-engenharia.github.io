@@ -608,6 +608,20 @@
             text-align: center;
         }
 
+        .copyright a {
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .copyright a:hover {
+            color: var(--brand-light-blue);
+        }
+
+        .copyright-sep {
+            margin: 0 8px;
+        }
+
         /* RESPONSIVIDADE */
         @media (min-width: 769px) {
             .hero {
@@ -1020,6 +1034,8 @@
 
         <div class="copyright">
             &copy; 2026 Horizons Engenharia. Todos os direitos reservados.
+            <span class="copyright-sep">&middot;</span>
+            <a href="privacidade.html">Política de Privacidade</a>
         </div>
     </footer>
 
