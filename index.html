@@ -211,7 +211,7 @@
 
         /* CONFIGURAÇÃO GERAL DE SECÇÕES */
         section.content-section {
-            padding: 120px 8%;
+            padding: 80px 8%;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -219,7 +219,7 @@
         section.content-section h2 {
             color: var(--heading-color);
             font-size: 2.5rem;
-            margin-bottom: 60px;
+            margin-bottom: 45px;
             font-weight: 700;
             letter-spacing: -0.5px;
             position: relative;
@@ -238,12 +238,14 @@
         /* 3. SECÇÃO DE SERVIÇOS */
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
 
         .service-card {
             background: white;
+            display: flex;
+            flex-direction: column;
             padding: 45px 35px;
             border-radius: 4px;
             box-shadow: 0 10px 30px rgba(1, 1, 28, 0.02);
@@ -315,8 +317,14 @@
 /* 5. SECÇÃO PORTEFÓLIO VISUAL */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .portfolio-item {
@@ -662,6 +670,9 @@
             }
             .hero h1 { font-size: 2rem; }
             section.content-section { padding: 80px 5%; }
+
+            .service-grid { gap: 25px; }
+            .service-card { padding: 35px 28px; }
         }
     </style>
 </head>
@@ -706,26 +717,20 @@
 
             <div class="service-card">
                 
-                <h3>Projetos MEP</h3>
+                <h3>Projetos Complementares</h3>
                 <p>Asseguramos o desenvolvimento e entrega de <strong>todas as redes e especialidades técnicas</strong> necessárias: redes hidráulicas, elétricas, telecomunicações (TELECOM), segurança contra incêndio (SCI), acústica e térmica.</p>
             </div>
 
             <div class="service-card">
                 
                 <h3>Coordenação e Compatibilização</h3>
-                <p>Centralizamos a gestão de todas as engenharias. Realizamos uma análise crítica e integração dos projetos via <em>clash detection</em>, compatibilizando todas as especialidades antes de chegarem à obra.</p>
+                <p>Centralizamos a gestão de todas as engenharias. Realizamos uma análise crítica e integração dos projetos via <strong><em>clash detection</em></strong>, compatibilizando todas as especialidades antes de chegarem à obra.</p>
             </div>
 
             <div class="service-card">
-                
-                <h3>Modelação, Medições</h3>
-                <p>Desenvolvimento de modelos inteligentes para extração rigorosa de mapas de quantidades com recurso a processos automatizados e em comunicação direta com os modelos BIM, assegurando orçamentos precisos e otimizando a fase de construção.</p>
-            </div>
-            
-            <div class="service-card">
                
                 <h3>Consultoria BIM</h3>
-                <p>Assessoria especializada na implementação e gestão de projetos BIM, garantindo a otimização dos processos e a conformidade com as melhores práticas do setor.</p>
+                <p>Assessoria especializada na implementação e gestão de projetos <strong>BIM</strong>, garantindo a otimização dos processos e a conformidade com as melhores práticas do setor.</p>
             </div>
         </div>
     </section>
